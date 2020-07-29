@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package db;
+
+message SingleRow {
+    int64 id = 1;
+    int64 age = 2;
+    string firstname = 3;
+    string lastname = 4;
+    string email = 5;
+}
+
+message Rows {
+    repeated SingleRow rows = 1;
+}
+
+message Id {
+    int64 id = 1;
+}
+
+message Empty {
+}
+
+service DatabaseService {
+    rpc GetDB(Empty) returns (Rows) {}
+    rpc Insert(SingleRow) returns (SingleRow) {}
+    rpc DeleteByID(Id) returns (Empty) {}
+    rpc UpdateByID(SingleRow) returns (SingleRow) {}
+    rpc FindByID(Id) returns (SingleRow) {}
+}
